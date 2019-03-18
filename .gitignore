@@ -112,3 +112,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+datasets/eeg/eeg_data/assr1000_8000/data.npy
+datasets/eeg/eeg_data/assr1000_8000/target.npy
