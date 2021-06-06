@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AR Camera</title>
+</head>
+<body style="margin: 0px; overflow: hidden;">
+	<!-- A-Frame ライブラリの読み込み -->
+	<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+	<!-- AR.js ライブラリの読み込み -->
+	<script
+		src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+	<!-- A-Frame の VR空間に AR.js を紐づける（デバッグUIを非表示） -->
+	<a-scene embedded arjs="debugUIEnabled:false;"> <!-- マーカーを登録-->
+
+	<a-marker type="pattern" url="/ar_markers/pattern-test.patt">
+	<a-text value="Hello !！！" position="0 1.3 0" align="center"></a-text> <a-box
+		position="0 0.5 0" wireframe="false" color="#0000ff"
+		th:link="|href: http://localhost:8080/stamp/stampget/${user}/1|"></a-box>
+	</a-marker> <a-marker type="pattern" url="/ar_markers/pattern-test2.patt">
+	<a-text value="Thanks !！！" position="0 1.3 0" align="center"></a-text>
+	<a-box position="0 0.5 0" wireframe="false" color="#ff0000"
+		th:link="|href: http://localhost:8080/stamp/stampget/${user}/2|"></a-box>
+	</a-marker> <!-- AR用のカメラを置く --> <a-entity camera> <a-entity
+		cursor="fuse: false; fuseTimeout: 500"> </a-entity></a-scene>
+
+</body>
+</html>
