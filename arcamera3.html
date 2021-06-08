@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>AR Camera</title>
+<script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+<script
+	src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+
+<script>
+	AFRAME
+			.registerComponent(
+					'change-url',
+					{
+						schema : {},
+						init : function() {
+							this.el
+									.addEventListener(
+											'click',
+											function(e) {
+												console.log(e.target.className);
+												if (e.target.className == "obj1") {
+													window.location.href = "http://localhost:8080/stamp/stampget/1";
+												}
+												if (e.target.className == "obj2") {
+													window.location.href = "http://localhost:8080/stamp/stampget/2";
+												}
+											})
+						}
+					})
+</script>
+</head>
+
+<body>
+
+	<a-assets> <img id="button" src="/images/button.png">
+	<a-asset-item id="chopper" src="/ar_objects/chopper.glb"></a-asset-item>
+	<a-asset-item id="beagle" src="/ar_objects/beagle.glb"></a-asset-item>
+	</a-assets>
+
+	<a-scene embedded arjs="debugUIEnabled: false"
+		vr-mode-ui="enabled: false"> <a-marker preset="custom"
+		type="pattern" url="/ar_markers/pattern-01.patt" material arjs-anchor
+		arjs-hit-testing> <a-entity gltf-model="#chopper"
+		scale="0.4 0.4 0.4" position="0 0.5 0" rotation="60 180 0"
+		animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 5000; easing: linear"></a-entity>
+	<a-image class="obj1" src="#button" position="1.5 0 0"
+		rotation="-90 0 0" change-url material geometry></a-image> </a-marker> <a-marker
+		preset="hiro" material arjs-anchor arjs-hit-testing> <a-entity
+		gltf-model="#beagle" scale="10.0 10.0 10.0" position="0 0.5 0"
+		rotation="0 0 0"
+		animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 5000; easing: linear"></a-entity>
+	<a-image class="obj2" src="#button" position="1.5 0 0"
+		rotation="-90 0 0" change-url material geometry></a-image> </a-marker> <a-entity
+		camera raycaster="objects: .obj1"
+		cursor="fuse: false; rayOrigin: mouse;"></a-entity> <a-entity camera
+		raycaster="objects: .obj2" cursor="fuse: false; rayOrigin: mouse;"></a-entity>
+	</a-scene>
+
+</body>
+</html>
